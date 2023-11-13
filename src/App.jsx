@@ -3,16 +3,21 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar'
+import StockList from './components/StockList'
+import Footer from './components/Footer'
+import MarketOverview from './components/MarketOverview'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <section className='h-screen bg-cover font-[Poppins] md:bg-top bg-center'>
+    <section>
       <Navbar></Navbar>
-      <div className='flex flex-col justify-center text-center items-center h-3/4'>
-        DCMM
+      <MarketOverview/>
+      <div className='flex justify-center items-center'>
+        <StockList/>
       </div>
+      <Footer/>
     </section>
   )
 }
