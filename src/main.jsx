@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Trade from './pages/Trade.jsx';
 import Orders from './pages/Orders.jsx';
+import Wallet from './pages/Wallet.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/order',
     element: <Orders/>
+  },
+  {
+    path: '/wallet',
+    element: <Wallet/>
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
