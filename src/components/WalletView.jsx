@@ -4,7 +4,7 @@ function WalletView() {
 
   return (
     <>
-   wa
+    table wallet view tuong tu nha
     </>
   )
 }

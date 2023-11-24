@@ -62,14 +62,14 @@ function Wallet() {
                         <div className="mr-auto"> <p className="text-[#1E2329] text-[20px] font-semibold">
                             My Assets </p>
                         </div>
-                        <div className="flex items-center">
+                        <button className="flex items-center">
                             <p className="text-[#1E2329] text-[14px] font-medium leading-[22px]">
                                 View All 350+ Coins </p>
                             <HiChevronRight
                                 width={12}
                                 height={12}
                                 className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
-                        </div>
+                        </button>
 
                     </div>
 
@@ -112,14 +112,14 @@ function Wallet() {
                         <div className="mr-auto"> <p className="text-[#1E2329] text-[20px] font-semibold">
                             Recent Transactions </p>
                         </div>
-                        <div className="flex items-center">
+                        <button className="flex items-center">
                             <p className="text-[#1E2329] text-[14px] font-medium leading-[22px]">
                                 More </p>
                             <HiChevronRight
                                 width={12}
                                 height={12}
                                 className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
-                        </div>
+                        </button>
                     </div>
 
                     <p className="text-center"> nodaat</p>
