@@ -12,7 +12,7 @@ function App() {
 
   return (
     <section>
-      <Navbar></Navbar>
+      <Navbar/>
       <MarketOverview/>
       <div className='flex justify-center items-center'>
         <StockList/>
