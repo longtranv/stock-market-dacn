@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
-import { EyeIcon } from "@heroicons/react/24/solid";
+import { EyeIcon } from "@heroicons/react/solid";
 import { HiChevronDown, HiChevronRight } from 'react-icons/hi';
 import { RiSearchLine } from 'react-icons/ri';
 import { Checkbox } from 'antd';

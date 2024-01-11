@@ -1,25 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './components/Navbar'
-import StockList from './components/StockList'
-import Footer from './components/Footer'
-import MarketOverview from './components/MarketOverview'
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import Home from "./pages/Home";
+import Orders from "./pages/Orders";
+import Trade from "./pages/Trade";
+import Wallet from "./pages/Wallet";
+import AddFund from "./pages/AddFund";
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <section>
-      <Navbar/>
-      <MarketOverview/>
-      <div className='flex justify-center items-center'>
-        <StockList/>
-      </div>
-      <Footer/>
-    </section>
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/">
+      <Route path="home" element ={<Home/>}/>
+      <Route path="order" element ={<Orders/>}/>
+      <Route path="trade" element ={<Trade/>}/>
+      <Route path="wallet" element ={<Wallet/>}/>
+      <Route path="addfund" element = {<AddFund/>}/>
+    </Route>
+
   )
-}
+);
 
-export default App
+export default router;
