@@ -6,6 +6,7 @@ import { RiSearchLine } from 'react-icons/ri';
 import { Checkbox } from 'antd';
 import CoinView from '../components/CoinView';
 import WalletView from '../components/WalletView';
+import {useNavigate} from 'react-router-dom'
 
 const assets = [
     {
@@ -22,6 +23,12 @@ function Wallet() {
 
     const [asset, setAssetActive] = useState('Coin View');
 
+    const navigate = useNavigate();
+
+    const handleNavigate = (path)=>{
+        navigate(path);
+    }
+
     return (
         <div>
             <Navbar />
@@ -37,7 +44,7 @@ function Wallet() {
                             <p className="text-[#1E2329] text-[32px] font-semibold font-arial font-sans-serif leading-10"> 0.00  </p>
                             <div className="flex items-center">
                                 <p className="text-[#1E2329] text-[14px] font-arial font-sans-serif leading-[22px] font-medium ml-2">
-                                    BTC </p>
+                                    USD </p>
                                 <HiChevronDown width={12} height={12} className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
                             </div>
                         </div>
@@ -45,7 +52,7 @@ function Wallet() {
                     </div>
 
                     <div className="flex items-start gap-2">
-                        <button className="bg-[#EAECEF] px-3 py-1 font-semibold rounded-[4px]">
+                        <button onClick={()=>handleNavigate("/enteramount")}  className="bg-[#EAECEF] px-3 py-1 font-semibold rounded-[4px]">
                             <p className="text-[#1E2329] text-[14px]">
                                 Deposit </p> </button>
                         <button className="bg-[#EAECEF] px-3 py-1 font-semibold rounded-[4px]">

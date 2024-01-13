@@ -1,23 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {BsSortDown, BsSortDownAlt} from 'react-icons/bs';
-import Stocks from '../../TestData';
 import { useNavigate } from "react-router-dom";
 
-const StockList = () => {
+const StockList = ({stocks}) => {
 
-    const [stocks, setStocks] = useState(Stocks);
     const [sortKey, setSortKey] = useState('price');
     const [sortOrder, setSortOrder] = useState('asc');
+
+
 
     const navigate = useNavigate();
     const handleNavigate = (symbol) => {
       navigate(`/trade/${symbol}`);
     }
 
-    // useEffect(()=>{
-    //     axios.get()
-    // }, [])
+    useEffect(()=>{
+    }, [])
 
     const handleSort = (key)=>{
         if(key===sortKey){
@@ -38,21 +37,28 @@ const StockList = () => {
         <table className='w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
             <tr>
+              <th>
+              <div className='flex'>
+              <div className="basis-0 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
+                Logo
+              </div>
+              </div>
+              </th>
             <th>
               <div className='flex'>
               <div className="basis-0 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-              onClick={()=>handleSort('symbol')}>
+              onClick={()=>handleSort('name')}>
                 Symbol
-                {sortOrder==='asc' && sortKey==='symbol'? <BsSortDownAlt size={20}/>:<BsSortDown size={20}/>}
+                {sortOrder==='asc' && sortKey==='name'? <BsSortDownAlt size={20}/>:<BsSortDown size={20}/>}
               </div>
               </div>
             </th>
             <th>
               <div className='flex'>
               <div className="basis-0 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-              onClick={()=>handleSort('price')}>
+              onClick={()=>handleSort('open')}>
                 Price
-                {sortOrder==='asc' && sortKey==='price'? <BsSortDownAlt size={20}/>:<BsSortDown size={20}/>}
+                {sortOrder==='asc' && sortKey==='open'? <BsSortDownAlt size={20}/>:<BsSortDown size={20}/>}
               </div>
               </div>
             </th>
@@ -78,10 +84,11 @@ const StockList = () => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {sortedStocks.map((stock) => (
-            <tr key={stock._id} onClick={()=>handleNavigate(stock.symbol)} className='hover:bg-slate-100 cursor-pointer'>
-              <td className="px-6 py-4 whitespace-nowrap">{stock.symbol}</td>
-              <td className="px-6 py-4 whitespace-nowrap">${stock.price}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{stock.change}%</td>
+            <tr key={stock._id} onClick={()=>handleNavigate(stock.name)} className='hover:bg-slate-100 cursor-pointer'>
+              <td className="px-6 py-4 whitespace-nowrap"><img src={stock.metadata?.logo} alt="dynamic logo" height={45} width={45} /></td>
+              <td className="px-6 py-4 whitespace-nowrap">{stock.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">${stock.open}</td>
+              <td className={`px-6 py-4 whitespace-nowrap ${stock.change<0?"text-red":"text-green"}`}>{stock.change}%</td>
               <td className="px-6 py-4 whitespace-nowrap">{stock.volume}</td>
             </tr>
           ))}

@@ -12,16 +12,21 @@ function Navbar() {
 
   return (
     <nav className='bg-white'>
-      <div className='flex items-center font-medium justify-around'>
+      <div className='flex items-center font-medium justify-between'>
+        <div className='flex flex-1 items-center'>
         <div className='z-50 p-5 md:w-auto w-full'>
           <img src={Logo} alt='logo' className='md:cursor-pointer h-9'></img>
         </div>
         <ul className='md:flex hidden uppercase items-center gap-8 font-[Poppins]'>
           <li>
-            <Link to="/" className='py-7 px-3 inline-block'> Home </Link>
+            <Link to="/" className='py-7 px-3 inline-block'> Market </Link>
           </li>
           <NavLink />
         </ul>
+        </div>
+        <div className='flex flex-1 items-center justify-end mr-12'>
+
+        
         <div className='flex'>
           <div className=''>
             <Lookup />
@@ -32,13 +37,15 @@ function Navbar() {
             </div>
           </Link>
           <div>
-            <RiFileList3Fill size={25} />
+            <Link to='/order'>
+            <RiFileList3Fill size={25} /></Link>
           </div>
         </div>
 
 
         <div className='md:block hidden'>
           <Avatar />
+        </div>
         </div>
         {/*MOBILE*/}
         <ul className={`md:hidden bg-white absolute w-full h-full bottom-0 py-24 pl-4`}>

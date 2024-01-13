@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '../components/CheckoutForm'
-import './AddFund.css'
+// import './AddFund.module.css'
 import 'axios'
 import axios from 'axios'
 
