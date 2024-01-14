@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/apiCall';
 import { useNavigate } from 'react-router-dom';
@@ -12,14 +12,18 @@ function Login() {
     const {currentUser, isFetching , error, errorMessage} = useSelector((state)=>state.user);
     const navigate = useNavigate();
 
+    if(currentUser){navigate('/')}
+
+    useEffect(()=>{
+        if(currentUser)
+        navigate('/')
+    },[currentUser])
+
     const handleClick = (e)=>{
         e.preventDefault();
         login(dispatch, {email, password})
         if(error){
             setIsError(true);
-        }
-        else if(currentUser){
-            navigate('/home');
         }
     }
 

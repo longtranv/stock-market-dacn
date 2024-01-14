@@ -1,13 +1,18 @@
 import React from 'react'
 import Logo from '../assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import NavLink from './NavLink'
 import Avatar from './Avatar'
 import Lookup from './Lookup'
 import { BiSolidWallet } from 'react-icons/bi'
 import { RiFileList3Fill } from 'react-icons/ri'
+import { IoIosGift } from "react-icons/io";
+import { useSelector } from 'react-redux'
 
 function Navbar() {
+
+  const user = useSelector((state)=>state.user.currentUser);
+  const navigate = useNavigate()
 
 
   return (
@@ -28,10 +33,11 @@ function Navbar() {
 
         
         <div className='flex'>
-          <div className=''>
+          <div className='mr-4'>
             <Lookup />
           </div>
-          <Link to="/wallet">
+          {user?
+          <div className='flex flex-1 items-center justify-end mr-12'><Link to="/wallet">
             <div className='mx-8'>
               <BiSolidWallet className="hover:text-[#FCD535]" size={25} />
             </div>
@@ -39,13 +45,16 @@ function Navbar() {
           <div>
             <Link to='/order'>
             <RiFileList3Fill size={25} /></Link>
-          </div>
-        </div>
-
-
-        <div className='md:block hidden'>
+          </div><div className='md:block hidden mx-4'>
           <Avatar />
+        </div></div>:<button onClick={()=>navigate('/login')} className='bg-yellow flex items-center justify-center h-10 w-20 text-black rounded'>
+            <IoIosGift size={14}/>
+            <span>login</span>
+            </button>}
         </div>
+
+
+        
         </div>
         {/*MOBILE*/}
         <ul className={`md:hidden bg-white absolute w-full h-full bottom-0 py-24 pl-4`}>

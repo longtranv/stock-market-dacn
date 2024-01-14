@@ -3,8 +3,8 @@ import axios from 'axios';
 import ReactApexChart from 'react-apexcharts';
 import { AAPL } from '../../TimeSeriesTest';
 
-function CandlestickChart() {
-  const [data, setData] = useState(AAPL);
+function CandlestickChart({tradeStock}) {
+  const [data, setData] = useState(tradeStock);
 
 //   useEffect(() => {
 //     // Replace with your MongoDB API endpoint to fetch time series data
@@ -17,11 +17,23 @@ function CandlestickChart() {
 //       });
 //   }, []);
 
+
   const series = [{
-    data: data.map((item) => ({
-      x: new Date(item.timestamp).getTime(),
-      y: [item.open, item.high, item.low, item.close],
-    })),
+    data: data.series?.map((item) => {
+      // Convert ISO string to a Date object
+      const dateObject = new Date(item.timestamp);
+
+      // Extract year, month, and day
+      const year = dateObject.getFullYear();
+      const month = dateObject.getMonth() + 1; // Months are zero-based, so add 1
+      const day = dateObject.getDate();
+
+      // Construct the date part string
+      const datePart = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+      return{
+      x: datePart,
+      y: [item.open, item.high, item.low, item.high],
+    }}),
   }];
 
   const options = {

@@ -10,6 +10,8 @@ function SignUp() {
   const dispatch = useDispatch();
   const {currentUser, isFetching , error, errorMessage} = useSelector((state)=>state.user);
 
+  if(currentUser){navigate('/')}
+
   const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ function SignUp() {
       setIsError(true)
     }
     else if(currentUser){
-      navigate('/home')
+      navigate('/')
     }
   }
 

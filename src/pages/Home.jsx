@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(()=>{
     const fetchData = async()=>{
-      const stocks = await axios.get('http://localhost:5000/stocklist')
+      const stocksList = await axios.get('http://localhost:5000/stocklist')
       .catch(function(error){
         console.log(error.toJSON());
       })
@@ -20,13 +20,11 @@ function Home() {
         console.log(error.toJSON());
       })
       console.log("toi day r leliu");
-      stocks.data.map((stock)=>{
+      stocksList.data.map((stock)=>{
         const matchChange = changes.data.find((element)=>element.symbol===stock.name);
-        console.log(stock.metadata.company)
         Object.assign(stock, matchChange);
       })
-      console.log(stocks.data);
-      setStocks(stocks.data);
+      setStocks(stocksList.data);
     }
     fetchData();
   },[])
