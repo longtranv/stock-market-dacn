@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from '../components/CheckoutForm'
-// import './AddFund.module.css'
 import 'axios'
 import axios from 'axios'
 
@@ -44,7 +43,7 @@ function AddFund() {
     }
     
     return (
-    <div className='AddFund'>
+    <div className='flex items-center'>
         {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
                 <CheckoutForm clientSecret={clientSecret} onSuccess={(paymentIntentId)=>onSuccessHandle(paymentIntentId)} />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PaymentElement, useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import './AddFund.module.css'
 
 function CheckoutForm({clientSecret, onSuccess}) {
 
@@ -69,16 +70,17 @@ function CheckoutForm({clientSecret, onSuccess}) {
         layout: 'tabs'
     }
   return (
-    <form onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+    <div className='text-base flex justify-center content-center h-screen w-screen antialiased'>
+    <form className='self-center rounded-md p-10 w-[30vw] shadow' onSubmit={handleSubmit}>
+      <PaymentElement className='mb-6' id="payment-element" options={paymentElementOptions} />
+      <button className='bg-indigo-600 text-white rounded text-base font-semibold cursor-pointer block w-full shadow pt-3 pr-4' disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+      {message && <div className='text-gray-600 text-base leading-5 pt-3 text-center' id="payment-message">{message}</div>}
+    </form></div>
   )
 }
 

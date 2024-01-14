@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { EyeIcon } from "@heroicons/react/solid";
 import { HiChevronDown, HiChevronRight } from 'react-icons/hi';
@@ -7,23 +7,36 @@ import { Checkbox } from 'antd';
 import CoinView from '../components/CoinView';
 import WalletView from '../components/WalletView';
 import {useNavigate} from 'react-router-dom'
-
-const assets = [
-    {
-        id: 1,
-        tt: 'Coin View',
-    },
-    {
-        id: 2,
-        tt: 'Wallet View',
-    },
-];
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import OpenOrders from '../components/OpenOrders';
 
 function Wallet() {
 
-    const [asset, setAssetActive] = useState('Coin View');
+    const user = useSelector((state)=>state.user.currentUser);
+
+    const [asset, setAssetActive] = useState(null);
+    const [wallet, setWallet] = useState(null)
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const {data} = await axios.get('http://localhost:5000/wallet', {
+                params:{
+                    userId: user.user.id
+                }
+            })
+            setWallet(data);
+            const asset = await axios.get('http://localhost:5000/asset',{
+                params:{
+                    userId: user.user.id
+                }
+            })
+            setAssetActive(asset.data);
+        }
+        fetchData();
+    },[])
 
     const handleNavigate = (path)=>{
         navigate(path);
@@ -41,14 +54,14 @@ function Wallet() {
                             <EyeIcon width={16} height={16} className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
                         </div>
                         <div className="flex flex-cols-3 items-end">
-                            <p className="text-[#1E2329] text-[32px] font-semibold font-arial font-sans-serif leading-10"> 0.00  </p>
+                            <p className="text-[#1E2329] text-[32px] font-semibold font-arial font-sans-serif leading-10"> {wallet?.balance}  </p>
                             <div className="flex items-center">
                                 <p className="text-[#1E2329] text-[14px] font-arial font-sans-serif leading-[22px] font-medium ml-2">
                                     USD </p>
                                 <HiChevronDown width={12} height={12} className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
                             </div>
                         </div>
-                        <p className="text-[#1E2329] font-normal text-[14px] leading-[20px]" > ≈ $0.00</p>
+                        <p className="text-[#1E2329] font-normal text-[14px] leading-[20px]" > ≈ ${wallet?.balance}</p>
                     </div>
 
                     <div className="flex items-start gap-2">
@@ -82,8 +95,8 @@ function Wallet() {
 
                     <div className="flex flex-col mt-8">
                         <div className="flex justify-center items-center mb-6">
-                            <div className="flex items-center gap-4 mr-auto">
-                                {assets.map((e) => {
+                            {/* <div className="flex items-center gap-4 mr-auto">
+                                {asset.map((e) => {
                                     const active = asset === e.tt;
                                     return (
                                         <div key={e.id}>
@@ -98,18 +111,16 @@ function Wallet() {
 
                                         </div>)
                                 })}
-                            </div>
+                            </div> */}
 
                             <div className="flex items-center">
-                                {asset === 'Coin View' && <RiSearchLine className="text-[#6c6b6b]" />}
+                                <RiSearchLine className="text-[#6c6b6b]" />
                                 <Checkbox className="ml-6" />
                                 <p className="ml-2 text-[14px] font-medium text-[#1E2329] leading-[22px]">
                                     Hide assets {'<'}1 USD</p>
                             </div>
                         </div>
-
-                        {asset === 'Coin View' && <> <CoinView /> </>}
-                        {asset === 'Wallet View' && <> <WalletView /> </>}
+                        <CoinView asset={asset}/>
                     </div>
 
                 </div>
@@ -128,8 +139,7 @@ function Wallet() {
                                 className="text-[#a1a1a1] hover:text-[#1f1f1f]" />
                         </button>
                     </div>
-
-                    <p className="text-center"> nodaat</p>
+                    <OpenOrders/>
                 </div>
             </div>
         </div>
