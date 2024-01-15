@@ -9,7 +9,7 @@ const SuccessPage = () => {
         <p className="text-gray-600">Thank you for your purchase. Your payment was successful.</p>
         <div className="mt-8">
           <button
-            className="px-4 py-2 bg-green-700 text-white rounded-md"
+            className="px-4 py-2 bg-green text-white rounded-md"
             onClick={() => window.location.replace('/')}
           >
             Continue

@@ -18,7 +18,7 @@ function AddFund() {
 
     useEffect(()=>{
         const fetchData = async()=>{
-            const {data} = await axios.post('http://localhost:5000/add-funds', {
+            const {data} = await axios.post('https://market-stock.onrender.com/add-funds', {
                 userId: user.user.id,
                 amount: location.state
             },{
@@ -43,7 +43,7 @@ function AddFund() {
     };
 
     const onSuccessHandle = async(paymentIntentId)=>{
-        const message = await axios.post('http://localhost:5000/addfund-success',{
+        const message = await axios.post('https://market-stock.onrender.com/addfund-success',{
             userId: user.user.id,
             paymentIntentId: paymentIntentId
         });

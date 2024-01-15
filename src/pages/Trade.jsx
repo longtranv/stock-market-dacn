@@ -28,7 +28,7 @@ function Trade() {
 
   useEffect(()=>{
     const fetchData = async()=>{
-      const {data} = await axios.get('http://localhost:5000/stock', {
+      const {data} = await axios.get('https://market-stock.onrender.com/stock', {
         params: {
           symbol: ticker
         }
@@ -85,7 +85,7 @@ function Trade() {
           setMessage('please enter the price and amount to buy stock')
         }
         else{
-          await axios.post('http://localhost:5000/order',{
+          await axios.post('https://market-stock.onrender.com/order',{
             userId: user.user.id,
             symbol: ticker,
             quantity: amountInputValueBuy,
@@ -113,7 +113,7 @@ function Trade() {
           setMessage('please enter the price and amount to sell stock')
         }
         else{
-          await axios.post('http://localhost:5000/order',{
+          await axios.post('https://market-stock.onrender.com/order',{
             userId: user.user.id,
             symbol: ticker,
             quantity: amountInputValueSell,

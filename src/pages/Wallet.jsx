@@ -22,7 +22,7 @@ function Wallet() {
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const {data} = await axios.get('http://localhost:5000/wallet', {
+            const {data} = await axios.get('https://market-stock.onrender.com/wallet', {
                 params:{
                     userId: user.user.id
                 },
@@ -31,7 +31,7 @@ function Wallet() {
                 }
             })
             setWallet(data);
-            const asset = await axios.get('http://localhost:5000/asset',{
+            const asset = await axios.get('https://market-stock.onrender.com/asset',{
                 params:{
                     userId: user.user.id
                 },

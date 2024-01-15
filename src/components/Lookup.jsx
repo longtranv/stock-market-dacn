@@ -13,11 +13,11 @@ function Lookup() {
 
   useEffect(()=>{
     const fetchData = async()=>{
-      const stocksList = await axios.get('http://localhost:5000/stocklist')
+      const stocksList = await axios.get('https://market-stock.onrender.com/stocklist')
       .catch(function(error){
         console.log(error.toJSON());
       })
-      const changes = await axios.get('http://localhost:5000/changelist')
+      const changes = await axios.get('https://market-stock.onrender.com/changelist')
       .catch(function(error){
         console.log(error.toJSON());
       })
