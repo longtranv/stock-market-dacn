@@ -12,7 +12,7 @@ function OpenOrders() {
 
   useEffect(()=>{
     const fetchData = async ()=>{
-        const {data} = await axios.get('http://localhost:5000/orderlist', {
+        const {data} = await axios.get('https://market-stock.onrender.com/orderlist', {
             params:{
               userId: user.user.id
             },

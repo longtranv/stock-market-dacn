@@ -19,12 +19,12 @@ function App(){
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user?.currentUser);
 
-  useEffect(()=>{
-    const handleBeforeUnload = (e)=>{
-      localStorage.clear();
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload)
-  },[])
+  // useEffect(()=>{
+  //   const handleBeforeUnload = (e)=>{
+  //     localStorage.clear();
+  //   }
+  //   window.addEventListener('beforeunload', handleBeforeUnload)
+  // },[])
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
