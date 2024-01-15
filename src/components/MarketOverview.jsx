@@ -1,30 +1,46 @@
 // MarketOverview.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import OverviewBox from './OverviewBox';
+import axios from 'axios';
 
 const MarketOverview = () => {
-  // Replace this with actual market data fetching logic
-  const marketData = [
-    { symbol: 'BTC/USDT', price: 60000, change: 2.5 },
-    { symbol: 'ETH/USDT', price: 4000, change: -1.2 },
-    // Add more market data items here
-  ];
+
+  const [stocks, setStocks] = useState([]);
+  const [highlightStocks, setHighLightStock] = useState([]);
+  const [topChangeStocks, settopChangeStock] = useState([]);
+  const [topVolumeStocks, settopVolumeStocks] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const stocksList = await axios.get('http://localhost:5000/stocklist');
+        const changes = await axios.get('http://localhost:5000/changelist');
+
+        const updatedStocks = stocksList.data.map((stock) => {
+          const matchChange = changes.data.find((element) => element.symbol === stock.name);
+          return { ...stock, ...matchChange };
+        });
+
+        setStocks(updatedStocks);
+        const topPrice = updatedStocks.filter((element) => element.open > 200);
+        setHighLightStock(topPrice);
+        const topChange = updatedStocks.filter((element) => element.change > 4);
+        settopChangeStock(topChange);
+        const topVolume = updatedStocks.filter((element) => element.volume > 100);
+        settopVolumeStocks(topVolume);
+      } catch (error) {
+        console.log(error.toJSON());
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="p-6 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-6">Market Overview</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {marketData.map((item) => (
-          <div
-            key={item.symbol}
-            className="bg-white p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold">{item.symbol}</h2>
-            <p className="text-gray-600">Price: ${item.price}</p>
-            <p className={`text-${item.change >= 0 ? 'green' : 'red'}-600`}>
-              Change: {item.change}%
-            </p>
-          </div>
-        ))}
-      </div>
+    <div className="flex flex-wrap">
+      <OverviewBox title="Highlight Stocks" stocks={highlightStocks} />
+      <OverviewBox title="Top Change Stocks" stocks={topChangeStocks} />
+      <OverviewBox title="Top Volume Stocks" stocks={topVolumeStocks} />
     </div>
   );
 };

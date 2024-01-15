@@ -1,32 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import Trade from './pages/Trade.jsx';
-import Orders from './pages/Orders.jsx';
+import { store, persistor } from './redux/store'
+import { Provider } from 'react-redux'
+import App from './App'
+import { ThemeProvider } from '@material-tailwind/react'
+import { PersistGate } from 'redux-persist/integration/react'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>
-  },
-  {
-    path: '/trade/:stock',
-    element: <Trade/>
-  },
-  {
-    path: '/order',
-    element: <Orders/>
-  }
-]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
-  </React.StrictMode>,
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider>
+          <App/>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
 )

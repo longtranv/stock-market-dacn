@@ -1,17 +1,22 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function NavLink() {
     const links =[
-        {name: 'Wallet'},
-        {name: 'Market'},
-        {name: "orders"},
+        {name: 'trade'},
     ]
+    const navigate = useNavigate();
+
+    const handleClick = ()=>{
+        navigate('/trade/TSLA')
+    }
+
   return (
     <>
     {
         links.map(link=>(
             <div>
-                <div className='px-3 text-left md:cursor-pointer'>
+                <div onClick={handleClick} className='px-3 text-left md:cursor-pointer'>
                     <h1 className='py-7'>{link.name}</h1>
                 </div>
             </div>

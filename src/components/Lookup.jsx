@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {FaSearchDollar} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 function Lookup() {
   const [isHidden, setIsHidden] = useState(true)
@@ -8,17 +9,32 @@ function Lookup() {
   const [stockSymbols, setStockSymbols] = useState([])
   const [query, setQuery] = useState([])
 
+  const navigate = useNavigate();
+
   useEffect(()=>{
-    const FetchData = async ()=>{
-    const {data} = await axios.get('https://fakestoreapi.com/products')
-    .catch(function (error) {
-      console.log(error.toJSON());
-    });
-    setStockSymbols(data)
-  }
-  FetchData()
+    const fetchData = async()=>{
+      const stocksList = await axios.get('http://localhost:5000/stocklist')
+      .catch(function(error){
+        console.log(error.toJSON());
+      })
+      const changes = await axios.get('http://localhost:5000/changelist')
+      .catch(function(error){
+        console.log(error.toJSON());
+      })
+      console.log("toi day r leliu");
+      stocksList.data.map((stock)=>{
+        const matchChange = changes.data.find((element)=>element.symbol===stock.name);
+        Object.assign(stock, matchChange);
+      })
+      setStockSymbols(stocksList.data);
+    }
+    fetchData();
 
   },[])
+
+  const handleNavigate = (path)=>{
+    navigate(path);
+  }
 
   const ToggleHide = ()=>{
     setIsHidden(!isHidden)
@@ -31,7 +47,7 @@ function Lookup() {
   }
 
   const handleInputChange = (e)=>{
-    setQuery(stockSymbols.filter((product)=> product.title.toLowerCase().includes(e.target.value.toLowerCase())))
+    setQuery(stockSymbols.filter((product)=> product.name.toLowerCase().includes(e.target.value.toLowerCase())||product.metadata?.company.toLowerCase().includes(e.target.value.toLowerCase())));
   }
   return (
     <>
@@ -50,13 +66,13 @@ function Lookup() {
           <div className='flex flex-col overflow-auto h-80 no-scrollbar'>
           {query.length?
             query.map((product)=>(
-              <div className='flex flex-row justify-between hover:bg-slate-100 cursor-pointer'>
+              <div onClick={()=>handleNavigate(`/trade/${product.name}`)} className='flex flex-row justify-between hover:bg-slate-100 cursor-pointer'>
                 <div className='flex flex-row justify-between w-1/4'>
-                  <img src={product.image} alt="image" className='w-8 h-8 ' />
-                  <p className=''>{product.id}</p>
+                  <img src={product.metadata?.logo} height={16} width={16} alt="image" className='w-8 h-8 ' />
+                  <p className=''>{product.name}</p>
                 </div>
-                <p className=''>{product.price} $</p>
-                <p className=''>quant: 100</p>
+                <p className=''>${product.open}</p>
+                <p className=''>{product.volume}</p>
               </div>
 
             )):null
