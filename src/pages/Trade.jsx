@@ -35,7 +35,6 @@ function Trade() {
       });
       setStock(data)
       setTodayData(data.series[data.series.length-1]);
-      console.log(todayData);
     }
     fetchData();
   }, [ticker])
@@ -94,6 +93,10 @@ function Trade() {
             price: priceInputValueBuy,
             status: 'pending',
             created_at: new Date().toISOString(),
+          }, {
+            headers: {
+              Authorization: `Bearer ${user.tokens.access.token}`
+            }
           }).then(response=>{
             if(response.status >= 200 && response.status < 300){
               setMessage('API call was successful');
@@ -118,6 +121,10 @@ function Trade() {
             price: priceInputValueSell,
             status: 'pending',
             created_at: new Date().toISOString(),
+          }, {
+            headers: {
+              Authorization: `Bearer ${user.tokens.access.token}`
+            }
           }).then(response=>{
             if(response.status >= 200 && response.status < 300){
               setMessage('API call was successful');
@@ -245,7 +252,7 @@ function Trade() {
             </div>
           </div>
         </div>
-        <div className='border-t flex'>
+        <div className='border-t flex justify-center items-center'>
             <OpenOrders/>
         </div>
       </div>

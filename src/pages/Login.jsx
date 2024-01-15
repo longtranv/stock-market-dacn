@@ -12,8 +12,6 @@ function Login() {
     const {currentUser, isFetching , error, errorMessage} = useSelector((state)=>state.user);
     const navigate = useNavigate();
 
-    if(currentUser){navigate('/')}
-
     useEffect(()=>{
         if(currentUser)
         navigate('/')

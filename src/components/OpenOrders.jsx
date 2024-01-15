@@ -14,11 +14,13 @@ function OpenOrders() {
     const fetchData = async ()=>{
         const {data} = await axios.get('http://localhost:5000/orderlist', {
             params:{
-                userId: user.user.id
+              userId: user.user.id
+            },
+            headers: {
+              Authorization: `Bearer ${user?.tokens.access.token}`
             }
         })
         setOrders(data)
-        console.log(user.user.id)
     }
     fetchData();
   },[])

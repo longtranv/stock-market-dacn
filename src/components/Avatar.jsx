@@ -17,7 +17,7 @@ const Avatar = () => {
     }
 
     const handleLogout = ()=>{
-      logout(dispatch);
+      logout(dispatch, user.tokens.refresh.token);
       navigate('/login');
     }
 

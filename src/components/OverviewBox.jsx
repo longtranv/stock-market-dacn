@@ -3,11 +3,10 @@ import React, { useEffect } from 'react'
 function OverviewBox({stocks, title}) {
 
     if (!stocks || stocks.length === 0) {
-        return <div>No items to display.</div>;
+        return <div className='mx-4'></div>;
       }
 
     useEffect(()=>{
-        console.log(stocks)
     },[])
   return (
     <div className="bg-white rounded-lg p-4 shadow-md mb-4">

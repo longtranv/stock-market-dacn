@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { PaymentElement, useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
-import './AddFund.module.css'
 
 function CheckoutForm({clientSecret, onSuccess}) {
 
@@ -13,7 +12,6 @@ function CheckoutForm({clientSecret, onSuccess}) {
     useEffect(()=>{
         if(!stripe){return}
         if(!clientSecret){return}
-        console.log(clientSecret)
     }, [message]);
 
     const handleSubmit =async (e)=>{
@@ -23,7 +21,6 @@ function CheckoutForm({clientSecret, onSuccess}) {
         }
         setIsLoading(true);
         
-        console.log('ttruoc cai confirm r liu oi')
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
@@ -31,7 +28,6 @@ function CheckoutForm({clientSecret, onSuccess}) {
             },
             redirect: 'if_required'
           });
-          console.log('qua confirm r dmm')
           // This point will only be reached if there is an immediate error when
           // confirming the payment. Otherwise, your customer will be redirected to
           // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -42,20 +38,16 @@ function CheckoutForm({clientSecret, onSuccess}) {
           } else {
             setMessage("An unexpected error occurred.");
           }
-          console.log('duma toi day r thg loz');
             stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent})=>{
-                console.log('vao cai retireve r thg loz')
             switch (paymentIntent.status) {
                 case "succeeded":
                     setMessage("Payment succeeded!");
                     onSuccess(paymentIntent.id)
-                    console.log("toi day roi")
                     break;
                 case "processing":
                     setMessage("Your payment is processing.");
                     break;
                 case "requires_payment_method":
-                    console.log("bi loi r dmm");
                     setMessage("Your payment was not successful, please try again.");
                     break;
                 default:
