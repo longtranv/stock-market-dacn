@@ -8,7 +8,6 @@ function LineChartCompo({tradeStock}) {
 
   useEffect(()=>{
     setData(tradeStock?.series);
-    console.log(data);
   },[tradeStock])
   return (
     <div className='flex-1'>

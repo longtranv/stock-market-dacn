@@ -21,7 +21,6 @@ function Lookup() {
       .catch(function(error){
         console.log(error.toJSON());
       })
-      console.log("toi day r leliu");
       stocksList.data.map((stock)=>{
         const matchChange = changes.data.find((element)=>element.symbol===stock.name);
         Object.assign(stock, matchChange);

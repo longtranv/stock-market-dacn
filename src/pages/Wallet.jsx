@@ -25,12 +25,18 @@ function Wallet() {
             const {data} = await axios.get('http://localhost:5000/wallet', {
                 params:{
                     userId: user.user.id
+                },
+                headers: {
+                    Authorization: `Bearer ${user.tokens.access.token}`
                 }
             })
             setWallet(data);
             const asset = await axios.get('http://localhost:5000/asset',{
                 params:{
                     userId: user.user.id
+                },
+                headers: {
+                    Authorization: `Bearer ${user.tokens.access.token}`
                 }
             })
             setAssetActive(asset.data);

@@ -21,6 +21,14 @@ export const register = async (dispatch, user) =>{
     }
 }
 
-export const logout = async (dispatch)=>{
+export const logout = async (dispatch, token)=>{
+    try {
+        await axios.post('http://localhost:5000/logout', {
+            refreshToken: token
+        })
+    } catch (error) {
+        
+    }
     dispatch(Logout());
+
 }

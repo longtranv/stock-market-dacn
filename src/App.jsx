@@ -9,10 +9,23 @@ import EnterAmount from "./pages/EnterAmount";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import SuccessPage from "./pages/SuccessPage";
+import { logout } from "./redux/apiCall";
+import { useEffect } from "react";
+import {persistor} from './redux/store'
 
 function App(){
+  const dispatch = useDispatch();
   const user = useSelector((state)=>state.user?.currentUser);
+
+  useEffect(()=>{
+    const handleBeforeUnload = (e)=>{
+      localStorage.clear();
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+  },[])
+
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
       <Route path="/" element ={<Home/>}/>
@@ -22,6 +35,7 @@ function App(){
         <Route path="wallet" element ={<Wallet/>}/>
         <Route path="addfund" element = {<AddFund/>}/>
         <Route path="enteramount" element={<EnterAmount/>}/>
+        <Route path="/success" element={<SuccessPage/>}/>
       </Route>
       <Route path="login" element={<Login/>}/>
       <Route path="signup" element={<SignUp/>}/>
