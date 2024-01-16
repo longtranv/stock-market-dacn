@@ -1,4 +1,4 @@
-import {loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, Logout} from './userSlice'
+import {loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, Logout, refreshToken} from './userSlice'
 import axios from 'axios'
 
 export const login = async (dispatch, user)=>{
@@ -31,4 +31,15 @@ export const logout = async (dispatch, token)=>{
     }
     dispatch(Logout());
 
+}
+
+export const RefreshToken = async (dispatch, token)=>{
+    try {
+        const res = await axios.post('http://localhost:5000/refresh-tokens', {
+            refreshToken: token
+        })
+        dispatch(refreshToken(res.data));
+    } catch (error) {
+        
+    }
 }

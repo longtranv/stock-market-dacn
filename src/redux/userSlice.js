@@ -37,9 +37,12 @@ const userSlice = createSlice({
         },
         Logout: (state)=>{
             return initialState;
+        },
+        refreshToken: (state, action)=>{
+            state.currentUser.tokens = action.payload;
         }
     }
 });
 
-export const {loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, Logout} = userSlice.actions;
+export const {loginStart, loginSuccess, loginFailure, registerStart, registerSuccess, registerFailure, Logout, refreshToken} = userSlice.actions;
 export default userSlice.reducer;
