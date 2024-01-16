@@ -19,7 +19,8 @@ module.exports = withMT({
         gray_text_input: '#848e9c',
         green_button: '#0ecb81',
         red_button: '#f6465d',
-        yellow: '#FCD535'
+        yellow: '#FCD535',
+        slate: '#F1F5F9'
       },
       spacing: {
         '515': '32rem',
