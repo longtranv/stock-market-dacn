@@ -35,7 +35,7 @@ export const logout = async (dispatch, token)=>{
 
 export const RefreshToken = async (dispatch, token)=>{
     try {
-        const res = await axios.post('http://localhost:5000/refresh-tokens', {
+        const res = await axios.post('https://market-stock.onrender.com/refresh-tokens', {
             refreshToken: token
         })
         dispatch(refreshToken(res.data));
