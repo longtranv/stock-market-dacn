@@ -84,7 +84,7 @@ const StockList = ({stocks}) => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {sortedStocks.map((stock) => (
-            <tr key={stock._id} onClick={()=>handleNavigate(stock.name)} className='hover:bg-slate-100 cursor-pointer'>
+            <tr key={stock._id} onClick={()=>handleNavigate(stock.name)} className='hover:bg-slate cursor-pointer'>
               <td className="px-6 py-4 whitespace-nowrap"><img src={stock.metadata?.logo} alt="dynamic logo" height={45} width={45} /></td>
               <td className="px-6 py-4 whitespace-nowrap">{stock.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">${stock.open}</td>

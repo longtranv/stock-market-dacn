@@ -37,7 +37,7 @@ function Trade() {
       setTodayData(data.series[data.series.length-1]);
     }
     fetchData();
-  }, [ticker])
+  }, [ticker, serverMessage])
 
 
   const toggleCandlestick = (chartType)=>{
