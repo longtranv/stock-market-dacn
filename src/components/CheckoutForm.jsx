@@ -65,8 +65,8 @@ function CheckoutForm({clientSecret, onSuccess}) {
     <div className='text-base flex justify-center content-center h-screen w-screen antialiased'>
     <form className='self-center rounded-md p-10 w-[30vw] shadow' onSubmit={handleSubmit}>
       <PaymentElement className='mb-6' id="payment-element" options={paymentElementOptions} />
-      <button className='bg-indigo-600 text-white rounded text-base font-semibold cursor-pointer block w-full shadow pt-3 pr-4' disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
+      <button className='flex justify-center items-center text-center bg-indigo-600 text-white rounded text-base font-semibold cursor-pointer w-full shadow pt-3 pr-4' disabled={isLoading || !stripe || !elements} id="submit">
+        <span id="button-text" className='mb-3'>
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>

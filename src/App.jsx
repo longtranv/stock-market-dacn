@@ -11,20 +11,20 @@ import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import SuccessPage from "./pages/SuccessPage";
-import { logout } from "./redux/apiCall";
+import { RefreshToken, logout } from "./redux/apiCall";
 import { useEffect } from "react";
 import {persistor} from './redux/store'
+import axios from "axios";
 
 function App(){
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user?.currentUser);
 
-  // useEffect(()=>{
-  //   const handleBeforeUnload = (e)=>{
-  //     localStorage.clear();
-  //   }
-  //   window.addEventListener('beforeunload', handleBeforeUnload)
-  // },[])
+  useEffect(()=>{
+    if(user){
+      RefreshToken(dispatch, user.tokens.refresh.token);
+    }
+  },[])
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
