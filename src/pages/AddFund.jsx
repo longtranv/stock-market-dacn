@@ -18,7 +18,7 @@ function AddFund() {
 
     useEffect(()=>{
         const fetchData = async()=>{
-            const {data} = await axios.post('https://market-stock.onrender.com/add-funds', {
+            const {data} = await axios.post('http://ec2-52-65-120-170.ap-southeast-2.compute.amazonaws.com:3000/add-funds', {
                 userId: user.user.id,
                 amount: location.state
             },{
@@ -43,7 +43,7 @@ function AddFund() {
     };
 
     const onSuccessHandle = async(paymentIntentId)=>{
-        const message = await axios.post('https://market-stock.onrender.com/addfund-success',{
+        const message = await axios.post('http://ec2-52-65-120-170.ap-southeast-2.compute.amazonaws.com:3000/addfund-success',{
             userId: user.user.id,
             paymentIntentId: paymentIntentId
         });
