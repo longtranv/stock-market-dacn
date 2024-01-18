@@ -13,8 +13,8 @@ const MarketOverview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const stocksList = await axios.get('http://ec2-52-65-120-170.ap-southeast-2.compute.amazonaws.com:3000/stocklist');
-        const changes = await axios.get('http://ec2-52-65-120-170.ap-southeast-2.compute.amazonaws.com:3000/changelist');
+        const stocksList = await axios.get('https://market-stock.onrender.com/stocklist');
+        const changes = await axios.get('https://market-stock.onrender.com/changelist');
 
         const updatedStocks = stocksList.data.map((stock) => {
           const matchChange = changes.data.find((element) => element.symbol === stock.name);
