@@ -12,7 +12,7 @@ function OpenOrders() {
 
   useEffect(()=>{
     const fetchData = async ()=>{
-        const {data} = await axios.get('https://market-stock.onrender.com/orderlist', {
+        const {data} = await axios.get('http://ec2-52-65-120-170.ap-southeast-2.compute.amazonaws.com:3000/orderlist', {
             params:{
               userId: user.user.id
             },
