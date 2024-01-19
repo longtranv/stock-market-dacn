@@ -229,7 +229,7 @@ function Trade() {
                   type="text" className='w-full outline-none h-full bg-inherit opacity-100 border-none text-right '/>
                 </div>
                 <div className='text-red text-sm font-normal'>{message&&message}</div>
-                <button onClick={(e)=>handleClick(e, 'buy')} className='bg-green_button rounded my-4 w-full h-10 text-white'>BUY {ticker}</button>
+                <button onClick={(e)=>handleClick(e, 'buy')} className={`bg-green_button rounded my-4 w-full h-10 text-white ${message?'opacity-50 cursor-not-allowed':''}`}>BUY {ticker}</button>
               </div>
               <div className='flex flex-col w-56'>
               <div className='hover:border-orange w-full  h-10 flex flex-row items-center leading-6 rounded bg-gray_input border border-solid my-2.5'>
@@ -247,7 +247,7 @@ function Trade() {
                   type="text" className='w-full outline-none h-full bg-inherit opacity-100 border-none text-right flex-1'/>
                 </div>
                 <div className='text-red text-sm font-normal'>{message&&message}</div>
-                <button onClick={(e)=>handleClick(e, 'sell')} className='bg-red_button rounded my-4 w-full h-10 text-white'>SELL {ticker}</button>
+                <button disabled={message} onClick={(e)=>handleClick(e, 'sell')} className={`bg-red_button rounded my-4 w-full h-10 text-white ${message?'opacity-50 cursor-not-allowed':''}`}>SELL {ticker}</button>
               </div>
             </div>
           </div>
