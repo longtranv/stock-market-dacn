@@ -38,7 +38,7 @@ function OpenOrders() {
   const handleCancel = async (e, id)=>{
     e.preventDefault();
     setDisable(true);
-    await axios.post('http://localhost:5000/cancel-order', {
+    await axios.post('https://market-stock.onrender.com/cancel-order', {
       id: id
     }, {
       headers: {
@@ -55,7 +55,7 @@ function OpenOrders() {
     const dateA = new Date(a.created_at);
     const dateB = new Date(b.created_at);
 
-    if (sortByType === 'asc') {
+    if (sortByDate === 'asc') {
       return a.orderType.localeCompare(b.orderType) || dateA - dateB;
     } else {
       return b.orderType.localeCompare(a.orderType) || dateB - dateA;
