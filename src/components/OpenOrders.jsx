@@ -7,6 +7,7 @@ function OpenOrders() {
   const [sortByType, setSortByType] = useState('asc'); // 'asc' or 'desc'
   const [sortByDate, setSortByDate] = useState('asc'); // 'asc' or 'desc'
   const [orders, setOrders] = useState([])
+  const [disable, setDisable] = useState(false)
 
   const user = useSelector((state)=>state.user.currentUser);
 
@@ -33,6 +34,20 @@ function OpenOrders() {
   const handleSortByDate = () => {
     setSortByDate((prev) => (prev === 'asc' ? 'desc' : 'asc'));
   };
+
+  const handleCancel = async (e, id)=>{
+    e.preventDefault();
+    setDisable(true);
+    await axios.post('http://localhost:5000/cancel-order', {
+      id: id
+    }, {
+      headers: {
+        Authorization: `Bearer ${user?.tokens.access.token}`
+      }
+    }).then().catch((error)=>{});
+
+    setDisable(false);
+  }
 
   const sortedOrders = [...orders].sort((a, b) => {
     // Sorting logic based on the type and date
@@ -91,6 +106,9 @@ function OpenOrders() {
                 <td className="px-6 py-3">{order.created_at}</td>
                 <td className="px-6 py-3">${order.price}</td>
                 <td className="px-6 py-3">{order.quantity}</td>
+                <td className='px-6 py-3'><button onClick={(event)=>handleCancel(event, order._id)} disabled={disable} className={`bg-red_button hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${disable?'opacity-50 cursor-not-allowed':''}`}>
+                {disable?<svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+  </svg>:<p className="mx-auto tracking-wide">cancel</p>}</button></td>
               </tr>
             ))}
           </tbody>
