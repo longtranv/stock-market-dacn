@@ -7,6 +7,6 @@ Welcome to **My Awesome Application**! This project is a full-stack web applicat
 ## 🚀 Quick Links
 
 - **Frontend**: [stock-market-dacn.vercel.app](stock-market-dacn.vercel.app)
-- **Backend**: []()
+- **Backend**: [https://github.com/longtranv/stock-market-backend.git](https://github.com/longtranv/stock-market-backend.git)
 
 ---
